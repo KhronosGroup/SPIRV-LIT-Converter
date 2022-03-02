@@ -132,12 +132,40 @@ test directory anyway):
 ./run.sh /home/user/spirv/llvm-project/llvm/projects/SPIRV-LLVM-Translator/test/transcoding/OpMin.ll
 ./run.sh /home/user/spirv/LLVM-SPIRV-Backend/llvm/test/CodeGen/SPIRV/transcoding/OpMin.ll
 ```
-If your paths are different from default and you don't want to change `SPIRV_HOME` environment variable in [`run.sh`](run.sh) script, alternatively, you can pass it from command line, e.g:
+If your paths are different from default and you don't want to change `SPIRV_HOME` environment variable in [`run.sh`](run.sh) script, alternatively, you can pass it from command line, e.g.:
 ```
 SPIRV_HOME="/home/user/spirv" ./run.sh transcoding/OpMin.ll
 ```
 If test didn't passed or `llvm-lit` didn't run at all and you get on stderr lines with ` ; CHECK...: ...` lit's commands (for e.g., as in `./run.sh simple.ll`),
 you have to manually fix the test (e.g., by removing extra `CHECK`s that are not SPIR-V instructions) or extend [`synt.py`](synt.py) otherwise.
+
+## Parameters
+
+There is possibility not to run all of the steps mentioned above, but only selected ones, or switch off some steps, or start from specified step.  
+To run only one specified step, pass any of `cl`, `spt`, `tri`, `strip`, `synt`, `llc`, `lit` additional parameter next after file name, e.g.:
+```
+./run.sh select.ll tri
+```
+will copy source lit test from [SPIRV-LLVM-Translator](https://github.com/KhronosGroup/SPIRV-LLVM-Translator/tree/master/test) and launch only [`triple.py`](triple.py) script.  
+Then, to continue to process all remaining phases, pass next step as additional parameter with extra symbol at the end (e.g., `.`):
+```
+./run.sh select.ll strip.
+```
+(This available only for `tri.`, `strip.`, `synt.` and `llc.` stages.)  
+This "step's enabling" parameter (if any) should be first additional one (next after file name) and before "steps' disabling" parameter(s) (if any).  
+To disable executing one or more steps, specify it with prepending `-` symbol, e.g. to switch off generating unneeded source and target assembler files (`.spt` and `.s`):
+```
+./run.sh select.ll -spt -llc
+```
+"Enabling" and "disabling" parameters can be combined, but "enabling" first, e.g.:
+```
+./run.sh select.ll strip. -llc -lit
+```
+There is possibility to run converted `.cl` lit test in its source `.cl` format rather that in `.ll` one:
+```
+./run.sh read_image.cl cl
+./run.sh read_image.cl lit
+```
 
 ## Error codes
 

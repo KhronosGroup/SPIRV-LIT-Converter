@@ -148,6 +148,7 @@ BUILTIN = {
 }
 
 FPARAT = {
+ '4': 'NoAlias',
  '6': 'NoWrite',
 }
 FPRM = {

@@ -406,7 +406,7 @@ for line in ll:
                         if ( # exeptions from adding '%'
                             opcode == 'Capability' or
                             opcode == 'ExtInstImport' or
-                            opcode == 'EntryPoint' and n != 2 or
+                            opcode == 'EntryPoint' and n == 3 or
                             opcode == 'ExecutionMode' and n != 1 or
                             opcode == 'Source' and (n == 2 or n == 4) or
                             opcode == 'Extension' or opcode == 'SourceExtension' or

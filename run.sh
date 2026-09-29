@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# SPDX-FileCopyrightText: 2026 The Khronos Group, Inc.
+# SPDX-License-Identifier: Apache-2.0
+
 # replace this path with yours or/and fix other paths
 [[ -z "$SPIRV_HOME" ]] && SPIRV_HOME=~/spirv
 

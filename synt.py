@@ -1,5 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+# SPDX-FileCopyrightText: 2026 The Khronos Group, Inc.
+# SPDX-License-Identifier: Apache-2.0
 
 import sys
 import re
@@ -397,7 +399,7 @@ for line in ll:
                         pparam = mat.group(1)
                         params = mat.group(2)
                         rsp = ''
-                        mat = r_rspace.match(pparam) # PARAM 
+                        mat = r_rspace.match(pparam) # PARAM
                         if mat:
                             rsp = mat.group(1)
                             pparam = pparam.strip()
